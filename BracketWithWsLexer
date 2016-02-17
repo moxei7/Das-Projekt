@@ -1,0 +1,50 @@
+package de.tudarmstadt.fop.project;
+
+import de.tudarmstadt.fop.project.parser.ParseException;
+import de.tudarmstadt.fop.project.parser.Token;
+
+public class BracketWithWsLexer extends BracketLexer {
+
+	public BracketWithWsLexer(String input) {
+		super(input);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public Token nextToken() throws ParseException{
+		try {super.nextToken();
+		
+		}
+		catch (ParseException lol){
+			if(la == ' '){
+				return nextToken();
+			}
+			else{
+				if(la == ','){
+					return nextToken();
+				}
+				else{
+					if(la == '\t'){
+						return nextToken();
+					}
+					else{
+						if(la == '\r'){
+							return nextToken();
+						}
+						else{
+							if(la == '\n'){
+								return nextToken();
+							}
+							else{
+								throw new ParseException("F");
+							}
+						}
+					}
+				}
+			}
+			
+		}
+		return nextToken();
+	}
+
+}
